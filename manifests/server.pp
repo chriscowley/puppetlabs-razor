@@ -36,7 +36,7 @@ class razor::server {
   }
 
   file { "${dest}/bin/razor-binary-wrapper":
-    ensure  => file, owner => root, group => root, mode => 0755,
+    ensure  => file, owner => root, group => root, mode => '0755',
     content => template('razor/razor-binary-wrapper.erb'),
     require => Exec["install razor binary distribution to ${dest}"]
   }
@@ -47,25 +47,25 @@ class razor::server {
 
   # Work around what seems very much like a bug in the package...
   file { "${dest}/bin/razor-admin":
-    mode    => 0755,
+    mode    => '0755',
     require => Exec["install razor binary distribution to ${dest}"]
   }
 
   file { "/var/lib/razor":
-    ensure => directory, owner => razor-server, group => razor-server, mode => 0775,
+    ensure => directory, owner => razor-server, group => razor-server, mode => '0775',
     require => Exec["install razor binary distribution to ${dest}"]
   }
 
   file { "/var/lib/razor/repo-store":
-    ensure => directory, owner => razor-server, group => razor-server, mode => 0775
+    ensure => directory, owner => razor-server, group => razor-server, mode => '0775'
   }
 
   file { "${dest}/log":
-    ensure  => directory, owner => razor-server, group => razor-server, mode => 0775,
+    ensure  => directory, owner => razor-server, group => razor-server, mode => '0775',
     require => Exec["install razor binary distribution to ${dest}"]
   }
 
   file { "${dest}/log/production.log":
-    ensure  => file, owner => razor-server, group => razor-server, mode => 0660
+    ensure  => file, owner => razor-server, group => razor-server, mode => '0660'
   }
 }
